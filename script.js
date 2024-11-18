@@ -6,7 +6,7 @@
 /*   By: momihamm <momihamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:24:22 by momihamm          #+#    #+#             */
-/*   Updated: 2024/11/17 19:17:56 by momihamm         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:22:42 by momihamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,49 @@ function downBall(kora, sor3aX, sor3aY, ballYPercent, ballXPercent)
     return [ballXPercent, ballYPercent];
 }
 
+// function tasadomX(ballXPercent, paddleXPercent, ard_paddle, ard_ball)
+// {
+//     let seven = (ard_ball / 4) * 3;
+//     if (ballXPercent >= paddleXPercent && (ballXPercent + ard_ball) <= (paddleXPercent + ard_paddle))
+//         {
+//             console.log(" in range");
+//             return (true);
+//         }
+//     if (ballXPercent >= paddleXPercent && (ballXPercent + seven) <= (paddleXPercent + ard_paddle))
+//     {
+//         console.log("kmi")
+//         return (true);
+//     }
+//     return (false);
+// }
+
 function tasadomX(ballXPercent, paddleXPercent, ard_paddle, ard_ball)
 {
-    if (ballXPercent >= paddleXPercent && (ballXPercent + ard_ball) <= (paddleXPercent + ard_paddle))
+    let seven = (ard_ball / 2) - 2;
+    let flag = false;
+    // if (ballXPercent >= paddleXPercent && (ballXPercent + ard_ball) <= (paddleXPercent + ard_paddle))
+    //     {
+    //         console.log(" in range");
+    //         return (true);
+    //     }
+    if (ballXPercent >= paddleXPercent)
+    {
+        // console.log(" X dakhel");
+        flag = true;
+    
+        // console.log("kora ", ballXPercent + seven ,  "PADDLE ", paddleXPercent + ard_paddle);
+        if ((ballXPercent + seven) <= (paddleXPercent + ard_paddle))
         {
-            console.log(" in range");
-            return (true);
+            console.log("kmi")
+            if (flag == true)
+                return (true);
         }
+    }
+    else if (ballXPercent <= paddleXPercent)
+    {
+        if ((ballXPercent + ard_ball) - 1 >= paddleXPercent)
+            return (true);
+    }
     return (false);
 }
 
@@ -54,7 +90,7 @@ function tasadomWhitPaddle(ballYPercent , paddleYPercent)
     // console.log ("B  ", ballYPercent, " P ", paddleYPercent);
     if (ballYPercent >= paddleYPercent)
     {
-        console.log("upper");
+        // console.log("upper");
         return (true);
     }
     return(false);   
@@ -73,7 +109,7 @@ function gameLoop() {
     const gameContainer = document.querySelector('.game');
     const ball = document.querySelector('.ball');
     const keysPressed = {};
-    const moveDistance = 2;
+    const moveDistance = 0.1;
     const containerWidth = gameContainer.clientWidth;
     const containerHeight = gameContainer.clientHeight;
     const maxLeft = 0;
